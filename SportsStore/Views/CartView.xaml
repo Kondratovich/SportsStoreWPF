@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="SportsStore.CartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SportsStore"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid Name="CartDataGrid" ItemsSource="{Binding SelectedCart.Products}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" Margin="15" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Description}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Дата добавления" Width="*" Binding="{Binding DateAdded}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <Button x:Name="DeleteBtn" Command="{Binding ElementName=CartDataGrid, Path=DataContext.DeleteProductFromCartCommand}" CommandParameter="{Binding Id}">Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

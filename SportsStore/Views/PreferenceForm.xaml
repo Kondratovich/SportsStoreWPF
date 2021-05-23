@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="SportsStore.PreferenceForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:SportsStore"
+             mc:Ignorable="d" >
+    <Grid>
+        <Border Margin="15" Background="White" Width="900" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="30"  CornerRadius="20">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Width="150">
+                    <Label Content="Материалы" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Height="50" Margin="0 0 0 10"></Label>
+                    <Label Content="Цена" FontSize="20" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
+                    <Label Content="Вид Спорта" FontSize="20" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
+                    <Label Content="Гарантия" FontSize="20" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
+                    <Label Content="Экологичность" FontSize="20" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
+
+                </StackPanel>
+                <StackPanel Width="100">
+                    <TextBox x:Name="materialsBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="14" Text="{Binding Preference.Materials}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBox x:Name="priceBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.Price}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBox x:Name="sportsBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.KindsOfSports}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBox x:Name="guaranteeBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.Guarantee}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBox x:Name="ecoBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.EcoFriendly}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <Button x:Name="SaveBtn" Content="Сохранить" HorizontalAlignment="Center" Foreground="Black" Background="Azure"  Command="{Binding AddPreferenceForm}" Margin="0 20 0 0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="20" Width="500" Foreground="Gray" Margin="20" TextWrapping="Wrap">
+                        <TextBlock.Text>
+                            Обозначьте цифрами от 1 до 5 в порядке возрастания критерии
+                            которыми вы руковдствуетесь при выборе продукции спорт магазина.
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

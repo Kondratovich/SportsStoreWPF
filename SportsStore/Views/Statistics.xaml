@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="SportsStore.Views.Statistics"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SportsStore.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <ScrollViewer HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Оценки Экспертов" Foreground="#5c5353" Margin="10" FontSize="15" FontWeight="Medium"/>
+                <DataGrid Name="PreferencesDataGrid" ItemsSource="{Binding Preferences}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Email эксперта" Width="*" Binding="{Binding UserEmail}"/>
+                        <DataGridTextColumn Header="Материалы" Width="*" Binding="{Binding Materials}"/>
+                        <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding Price}"/>
+                        <DataGridTextColumn Header="Вид спорта" Width="*" Binding="{Binding KindsOfSports}"/>
+                        <DataGridTextColumn Header="Гарантия" Width="*" Binding="{Binding Guarantee}"/>
+                        <DataGridTextColumn Header="Экологичность" Width="*" Binding="{Binding EcoFriendly}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock Text="Преобразование матрицы оценок" Foreground="#5c5353" Margin="10" FontSize="15" FontWeight="Medium"/>
+                <DataGrid ItemsSource="{Binding Preferences}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Email эксперта" Width="*" Binding="{Binding UserEmail}"/>
+                        <DataGridTextColumn Header="Материалы" Width="*" Binding="{Binding MaterialsReverse}"/>
+                        <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding PriceReverse}"/>
+                        <DataGridTextColumn Header="Вид спорта" Width="*" Binding="{Binding KindsOfSportsReverse}"/>
+                        <DataGridTextColumn Header="Гарантия" Width="*" Binding="{Binding GuaranteeReverse}"/>
+                        <DataGridTextColumn Header="Экологичность" Width="*" Binding="{Binding EcoFriendlyReverse}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock Text="Суммы преобразованных оценок по каждой из альтернатив" Foreground="#5c5353" Margin="10" FontSize="15" FontWeight="Medium"/>
+                <DataGrid ItemsSource="{Binding PreferenceSums}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Cумма альтернатив" Width="*" Binding="{Binding Sum}"/>
+                        <DataGridTextColumn Header="Материалы" Width="*" Binding="{Binding MaterialsSum}"/>
+                        <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding PriceSum}"/>
+                        <DataGridTextColumn Header="Вид спорта" Width="*" Binding="{Binding KindsOfSportsSum}"/>
+                        <DataGridTextColumn Header="Гарантия" Width="*" Binding="{Binding GuaranteeSum}"/>
+                        <DataGridTextColumn Header="Экологичность" Width="*" Binding="{Binding EcoFriendlySum}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock Text="Веса альтернатив" Margin="10" Foreground="#5c5353" FontSize="15" FontWeight="Medium"/>
+                <DataGrid ItemsSource="{Binding PreferenceSums}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" Margin="0 0 0 10" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Материалы" Width="*" Binding="{Binding MaterialsWeight}"/>
+                        <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding PriceWeight}"/>
+                        <DataGridTextColumn Header="Вид спорта" Width="*" Binding="{Binding KindsOfSportsWeight}"/>
+                        <DataGridTextColumn Header="Гарантия" Width="*" Binding="{Binding GuaranteeWeight}"/>
+                        <DataGridTextColumn Header="Экологичность" Width="*" Binding="{Binding EcoFriendlyWeight}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+﻿<Window x:Class="SportsStore.RegistrationWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:SportsStore.ViewModels.MultiBinding"
+        mc:Ignorable="d"
+        Title="Registration" Height="500" Width="650" MinWidth="500" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <converter:TotalConverter x:Key="TotalConverter"></converter:TotalConverter>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#7375D8">
+        <Border MinWidth="400" MaxWidth="500" Margin="15" Background="White" VerticalAlignment="Center" Padding="30"  CornerRadius="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" ShadowDepth="0"></DropShadowEffect>
+            </Border.Effect>
+            <StackPanel>
+                <Grid>
+                    <TextBlock Text="СпортСтильЖизни" HorizontalAlignment="Left" FontSize="30" FontWeight="Bold" Margin="0 0 0 10"></TextBlock>
+                    <Button x:Name="BackToStartWindowBtn" HorizontalAlignment="Right" Content="{materialDesign:PackIcon Kind=ArrowLeftBoldCircle}" Click="BackToStartWindowBtn_Click"></Button>
+                </Grid>
+                <TextBox x:Name="nameBox" materialDesign:HintAssist.Hint="Введите Имя" Margin="0 0 0 10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="surnameBox" materialDesign:HintAssist.Hint="Введите Фамилию" Margin="0 0 0 10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="emailBox" materialDesign:HintAssist.Hint="Введите email" Margin="0 0 0 10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <PasswordBox x:Name="passwordBox" materialDesign:HintAssist.Hint="Введите пароль" PasswordChanged="passwordBox_PasswordChanged" Margin="0 0 0 10" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
+                <Button x:Name="RegistrationBtn" Content="Зарегистрироваться" Command="{Binding RegistrationCommand}" Margin="0 20 0 0">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource TotalConverter }">
+                            <Binding Path="Text"  ElementName="nameBox"/>
+                            <Binding Path="Text"  ElementName="surnameBox"/>
+                            <Binding Path="Text"  ElementName="emailBox"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
