@@ -120,7 +120,7 @@
                                     </StackPanel>
                                     <Button Command="{Binding AddToCartCommand}" CommandParameter="{Binding StoreInfo.BestProduct.Id}" FontFamily="Champagne &amp; Limousines" Content="Добавить в корзину" FontSize="18" Margin="25"/>
                                 </StackPanel>
-                                <Image Margin="10" Width="200" Height="200" Source="{Binding StoreInfo.BestProduct.FullImagePath}" Stretch="UniformToFill"/>
+                                <Image Margin="10" Width="200" Height="200" Source="{Binding StoreInfo.BestProduct.ImagePath}" Stretch="UniformToFill"/>
                             </StackPanel>
 
                         </Grid>

@@ -65,6 +65,12 @@ namespace SportsStore.ViewModels {
                 return loginCommand ??
                   (loginCommand = new RelayCommand(
                       obj => {
+                          ValidationRules validation = new ValidationRules();
+                          validation.LoginFormValidate(Email, Password);
+                          if (!String.IsNullOrEmpty(validation.ValidationErors)) {
+                              MessageBox.Show(validation.ValidationErors);
+                              return;
+                          }
                           ServerOperations.SendData($"Login\n{Email}");
                           string salt = ServerOperations.ReceiveData();
                           if (salt == "NoUsers") {
@@ -107,6 +113,12 @@ namespace SportsStore.ViewModels {
                           Name = (string)parameters[0];
                           Surname = (string)parameters[1];
                           Email = (string)parameters[2];
+                          ValidationRules validation = new ValidationRules();
+                          validation.RegistrationFormValidate(Email, Name, Surname, Password);
+                          if (!String.IsNullOrEmpty(validation.ValidationErors)) {
+                              MessageBox.Show(validation.ValidationErors);
+                              return;
+                          }
                           //Генерируем соль
                           RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
                           byte[] buffer = new byte[4];

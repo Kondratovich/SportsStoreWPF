@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SportsStore.Models.Cart">
+    <Position X="11.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsStore.Models.Preference">
+    <Position X="9" Y="7.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCAAAAAQAAAAAAAAAAAEgAAAABAAAAAAAQCAAABAA=</HashCode>
+      <FileName>Models\Preference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsStore.Models.PreferenceSums">
+    <Position X="14.5" Y="7.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAEAAAAQGAAAAAAAAAAAAAAAAAAQAAAAGQ=</HashCode>
+      <FileName>Models\PreferenceSums.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsStore.Models.Product">
+    <Position X="10.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCAAAAAQAgAAAAAAAAAIQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsStore.Models.StoreInfo">
+    <Position X="6" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\StoreInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsStore.Models.User">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAEAAAAQABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsStore.Server.ServerOperations">
+    <Position X="7" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwQAAEAAAIAAAAAAAAAAAAAAAAAAAAgACAgABAAAAAA=</HashCode>
+      <FileName>Server\ServerOperations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsStore.ViewModels.BaseViewModel">
+    <Position X="3" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAQAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SportsStore.ViewModels.LoginViewModel">
+    <Position X="4.25" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAACAAAAAAQAAAAAQABAAAAAQCAIAAAACEAAE=</HashCode>
+      <FileName>ViewModels\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsStore.ViewModels.MainViewModel">
+    <Position X="1" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAMAABFBAIgAAQAAAwAEAIsIIAACERCICIIICAgA4kQ=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

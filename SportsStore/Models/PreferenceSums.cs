@@ -5,29 +5,25 @@ using System.Text;
 namespace SportsStore.Models {
     public class PreferenceSums {
         public int Sum { get; set; }
-        public int MaterialsSum { get; set; }
+        public int IsProfessionalSum { get; set; }
         public int PriceSum { get; set; }
         public int KindsOfSportsSum { get; set; }
-        public int GuaranteeSum { get; set; }
-        public int EcoFriendlySum { get; set; }
-        public float MaterialsWeight { get; set; }
+        public int ManufacturerSum { get; set; }
+        public float IsProfessionalWeight { get; set; }
         public float PriceWeight { get; set; }
         public float KindsOfSportsWeight { get; set; }
-        public float GuaranteeWeight { get; set; }
-        public float EcoFriendlyWeight { get; set; }
+        public float ManufacturerWeight { get; set; }
 
-        public PreferenceSums(int a, int b,int c, int d, int f, int g) {
-            MaterialsSum = a;
+        public PreferenceSums(int a, int b, int c, int d, int f) {
+            IsProfessionalSum = a;
             PriceSum = b;
             KindsOfSportsSum = c;
-            GuaranteeSum = d;
-            EcoFriendlySum = f;
-            Sum = g;
-            MaterialsWeight = MaterialsSum / (float)Sum;
+            ManufacturerSum = d;
+            Sum = f;
+            IsProfessionalWeight = IsProfessionalSum / (float)Sum;
             PriceWeight = PriceSum / (float)Sum;
             KindsOfSportsWeight = KindsOfSportsSum / (float)Sum;
-            GuaranteeWeight = GuaranteeSum / (float)Sum;
-            EcoFriendlyWeight = EcoFriendlySum / (float)Sum;
+            ManufacturerWeight = ManufacturerSum / (float)Sum;
         }
 
     }

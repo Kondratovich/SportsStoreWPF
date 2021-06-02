@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 
 namespace SportsStore.ViewModels {
@@ -101,7 +102,15 @@ namespace SportsStore.ViewModels {
         private string _imagePathForEdit;
         public string ImagePathForEdit {
             get {
-                _imagePathForEdit = GetFullPathInDocuments(SelectedProduct.ImagePath);
+                if (_imagePathForEdit == null) {
+                    _imagePathForEdit = SelectedProduct.ImagePath;
+                    return _imagePathForEdit;
+
+                }
+                //else if (Path.GetFileName(_imagePathForEdit) != $"{SelectedProduct.Name}.jpg"){
+                //    return _imagePathForEdit;
+                //}
+                //_imagePathForEdit = GetFullPathInDocuments(SelectedProduct.ImagePath);
                 return _imagePathForEdit;
             }
             set {
@@ -134,10 +143,9 @@ namespace SportsStore.ViewModels {
             SelectedProduct = selectedProduct;
         }
 
-        string GetFullPathInDocuments(string imageFileName) {
+        string GetFullPathInDocuments() {
             var baseFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var appStorageFolder = Path.Combine(baseFolder, "SportsStore");
-            var fullPath = Path.Combine(appStorageFolder, $"Images\\{imageFileName}");
+            var fullPath = Path.Combine(baseFolder, "SportsStore\\Images");
             return fullPath;
         }
 
@@ -156,9 +164,13 @@ namespace SportsStore.ViewModels {
             productData = productData.Remove(0, productData.IndexOf("\n") + 1);
             string description = productData.Substring(0, productData.IndexOf("\n"));
             productData = productData.Remove(0, productData.IndexOf("\n") + 1);
+            string manufacturer = productData.Substring(0, productData.IndexOf("\n"));
+            productData = productData.Remove(0, productData.IndexOf("\n") + 1);
+            ServerOperations.SendData("next");
+            productData = ServerOperations.ReceiveData();
             string imagePath = productData.Substring(0, productData.IndexOf("\n"));
             productData = productData.Remove(0, productData.IndexOf("\n") + 1);
-            StoreInfo.BestProduct = new Product(id, name, price, description, imagePath);
+            StoreInfo.BestProduct = new Product(id, name, price, description, manufacturer, imagePath);
         }
 
         public void SelectProducts() {
@@ -177,9 +189,13 @@ namespace SportsStore.ViewModels {
                 productData = productData.Remove(0, productData.IndexOf("\n") + 1);
                 string description = productData.Substring(0, productData.IndexOf("\n"));
                 productData = productData.Remove(0, productData.IndexOf("\n") + 1);
+                string manufacturer = productData.Substring(0, productData.IndexOf("\n"));
+                productData = productData.Remove(0, productData.IndexOf("\n") + 1);
+                ServerOperations.SendData("next");
+                productData = ServerOperations.ReceiveData();
                 string imagePath = productData.Substring(0, productData.IndexOf("\n"));
                 productData = productData.Remove(0, productData.IndexOf("\n") + 1);
-                _products.Add(new Product(id, name, price, description, imagePath));
+                _products.Add(new Product(id, name, price, description, manufacturer, imagePath));
                 ServerOperations.SendData("next");
                 productData = ServerOperations.ReceiveData();
             } while (productData != "end");
@@ -192,36 +208,32 @@ namespace SportsStore.ViewModels {
                 MessageBox.Show("Нет оценок в базе данных!");
                 return;
             }
-            int MaterialsSum = 0;
+            int IsProfessionalSum = 0;
             int PriceSum = 0;
             int KindsOfSportsSum = 0;
-            int GuaranteeSum = 0;
-            int EcoFriendlySum = 0;
+            int ManufacturerSum = 0;
             int Sum = 0;
             do {
-                byte materials = Convert.ToByte(data.Substring(0, data.IndexOf("\n")));
+                byte isProfessional = Convert.ToByte(data.Substring(0, data.IndexOf("\n")));
                 data = data.Remove(0, data.IndexOf("\n") + 1);
                 byte price = Convert.ToByte(data.Substring(0, data.IndexOf("\n")));
                 data = data.Remove(0, data.IndexOf("\n") + 1);
                 byte sport = Convert.ToByte(data.Substring(0, data.IndexOf("\n")));
                 data = data.Remove(0, data.IndexOf("\n") + 1);
-                byte guarantee = Convert.ToByte(data.Substring(0, data.IndexOf("\n")));
-                data = data.Remove(0, data.IndexOf("\n") + 1);
-                byte eco = Convert.ToByte(data.Substring(0, data.IndexOf("\n")));
+                byte manufacturer = Convert.ToByte(data.Substring(0, data.IndexOf("\n")));
                 data = data.Remove(0, data.IndexOf("\n") + 1);
                 string email = data.Substring(0, data.IndexOf("\n"));
                 data = data.Remove(0, data.IndexOf("\n") + 1);
-                MaterialsSum += (5 - materials);
-                PriceSum += (5 - price);
-                KindsOfSportsSum += (5 - sport);
-                GuaranteeSum += (5 - guarantee);
-                EcoFriendlySum += (5 - eco);
-                _preferences.Add(new Preference(materials,price,sport,guarantee,eco,email));
+                IsProfessionalSum += (4 - isProfessional);
+                PriceSum += (4 - price);
+                KindsOfSportsSum += (4 - sport);
+                ManufacturerSum += (4 - manufacturer);
+                _preferences.Add(new Preference(isProfessional, price, sport, manufacturer, email));
                 ServerOperations.SendData("next");
                 data = ServerOperations.ReceiveData();
             } while (data != "end");
-             Sum = (MaterialsSum + PriceSum + KindsOfSportsSum + GuaranteeSum + EcoFriendlySum);
-            _preferenceSums.Add(new PreferenceSums(MaterialsSum, PriceSum, KindsOfSportsSum, GuaranteeSum, EcoFriendlySum, Sum));
+             Sum = (IsProfessionalSum + PriceSum + KindsOfSportsSum + ManufacturerSum);
+            _preferenceSums.Add(new PreferenceSums(IsProfessionalSum, PriceSum, KindsOfSportsSum, ManufacturerSum, Sum));
         }
 
         public void SelectCartProducts(string email) {
@@ -240,11 +252,15 @@ namespace SportsStore.ViewModels {
                 productData = productData.Remove(0, productData.IndexOf("\n") + 1);
                 string description = productData.Substring(0, productData.IndexOf("\n"));
                 productData = productData.Remove(0, productData.IndexOf("\n") + 1);
-                string imagePath = productData.Substring(0, productData.IndexOf("\n"));
+                string manufacturer = productData.Substring(0, productData.IndexOf("\n"));
                 productData = productData.Remove(0, productData.IndexOf("\n") + 1);
                 string dateAdded = productData.Substring(0, productData.IndexOf("\n"));
-                productData = productData.Remove(0, productData.IndexOf("\n") + 1); 
-                _selectedCart.Products.Add(new Product(id, name, price, description, imagePath, dateAdded));
+                productData = productData.Remove(0, productData.IndexOf("\n") + 1);
+                ServerOperations.SendData("next");
+                productData = ServerOperations.ReceiveData();
+                string imagePath = productData.Substring(0, productData.IndexOf("\n"));
+                productData = productData.Remove(0, productData.IndexOf("\n") + 1);
+                _selectedCart.Products.Add(new Product(id, name, price, description, imagePath, manufacturer, dateAdded));
                 ServerOperations.SendData("next");
                 productData = ServerOperations.ReceiveData();
             } while (productData != "end");
@@ -258,28 +274,26 @@ namespace SportsStore.ViewModels {
                       obj => {
                           object[] parameters = obj as object[];
                           SelectedProduct.Name = (string)parameters[0];
-                          SelectedProduct.Price = Convert.ToDouble(parameters[1]);
-                          SelectedProduct.Description = (string)parameters[2];
-                          ServerOperations.SendData($"AddProduct\n{SelectedProduct.Name}\n{SelectedProduct.Price}\n{SelectedProduct.Description}\n");
-                          if (ServerOperations.ReceiveData() == "success") {
-                              if (SelectedProduct.ImagePath == "Assets/no_foto.jpg") {
-                                  ServerOperations.SendData("default");
-                              }
-                              else {
-                                  ServerOperations.SendData("notdefault");
-                                  ServerOperations.ReceiveData();
-                                  //byte[] imageArray = System.IO.File.ReadAllBytes(ImagePath);
-                                  Image image = Image.FromFile(ImagePath);
-                                  image.Save(GetFullPathInDocuments($"{SelectedProduct.Name}.jpg"));
-                                  //ServerOperations.SendByteData(imageArray);
-                              }
-                              if (ServerOperations.ReceiveData() == "success")
-                                  MessageBox.Show("Товар добавлен");
-                              else
-                                  MessageBox.Show("Ошибка загрузки изображения!");
+                          try {
+                            SelectedProduct.Price = Convert.ToDouble(parameters[1]);      
                           }
-                          else
-                              MessageBox.Show("Ошибка добавления");
+                          catch {
+                              MessageBox.Show("- Некорректная цена. Пример: «18,6»\n");
+                              return;
+                          }
+                          SelectedProduct.Description = (string)parameters[2];
+                          SelectedProduct.Manufacturer = (string)parameters[3];
+                          ValidationRules validation = new ValidationRules();
+                          validation.AddProductValidate(SelectedProduct.Name, SelectedProduct.Price, SelectedProduct.Description, SelectedProduct.Manufacturer);
+                          if (!String.IsNullOrEmpty(validation.ValidationErors)) {
+                              MessageBox.Show(validation.ValidationErors);
+                              return;
+                          }
+                          ServerOperations.SendData($"AddProduct\n{SelectedProduct.Name}\n{SelectedProduct.Price}\n{SelectedProduct.Description}\n{SelectedProduct.Manufacturer}\n{SelectedProduct.ImagePath}\n");
+                            if (ServerOperations.ReceiveData() == "success")
+                                MessageBox.Show("Товар добавлен");
+                            else
+                                MessageBox.Show("Ошибка добавления!");
                       }));
             }
         }
@@ -290,7 +304,13 @@ namespace SportsStore.ViewModels {
                 return addPreferenceForm ??
                   (addPreferenceForm = new RelayCommand(
                       obj => {
-                          ServerOperations.SendData($"AddPreferenceForm\n{Preference.Materials}\n{Preference.Price}\n{Preference.KindsOfSports}\n{Preference.Guarantee}\n{Preference.EcoFriendly}\n{CurrentUser.Email}\n");
+                          ValidationRules validation = new ValidationRules();
+                          validation.EditPreferenceForm(Preference.IsProfessional, Preference.Price, Preference.KindsOfSports, Preference.Manufacturer);
+                          if (!String.IsNullOrEmpty(validation.ValidationErors)) {
+                              MessageBox.Show(validation.ValidationErors);
+                              return;
+                          }
+                          ServerOperations.SendData($"AddPreferenceForm\n{Preference.IsProfessional}\n{Preference.Price}\n{Preference.KindsOfSports}\n{Preference.Manufacturer}\n{CurrentUser.Email}\n");
                             if (ServerOperations.ReceiveData() == "success")
                                 MessageBox.Show("Форма успешно отправлена!");
                             else
@@ -313,19 +333,66 @@ namespace SportsStore.ViewModels {
             }
         }
 
+        private RelayCommand generateReportCommand;
+        public RelayCommand GenerateReportCommand {
+            get {
+                return generateReportCommand ??
+                  (generateReportCommand = new RelayCommand(
+                      obj => {
+                          StringBuilder table = new StringBuilder();
+                          table.Append("\tИсходные оценки экспертов\n");
+                          table.Append("\t+--+--+--+--+\n");
+                          table.Append("\t|A1|A2|A3|A4|\n");
+                          table.Append("\t+--+--+--+--+\n");
+                          foreach(var preference in Preferences) {
+                                table.Append($"\t|{preference.IsProfessional} |{preference.Price} |{preference.Manufacturer} |{preference.KindsOfSports} |\n");
+                                table.Append("\t+--+--+--+--+\n");
+                          }
+                          table.Append("\tПреобразованные оценки экспертов\n");
+                          table.Append("\t+--+--+--+--+\n");
+                          table.Append("\t|A1|A2|A3|A4|\n");
+                          table.Append("\t+--+--+--+--+\n");
+                          foreach (var preference in Preferences) {
+                              table.Append($"\t|{preference.IsProfessionalReverse} |{preference.PriceReverse} |{preference.ManufacturerReverse} |{preference.KindsOfSportsReverse} |\n");
+                              table.Append("\t+--+--+--+--+\n");
+                          }
+                          table.Append("\tCуммы альтернатив\n");
+                          table.Append("\t+--+--+--+--+--+\n");
+                          table.Append("\t|C |C1|C2|C3|C4|\n");
+                          table.Append("\t+--+--+--+--+\n");
+                          foreach (var preference in PreferenceSums) {
+                              table.Append($"\t|{preference.IsProfessionalSum} |{preference.PriceSum} |{preference.ManufacturerSum} |{preference.KindsOfSportsSum} |\n");
+                              table.Append("\t+--+--+--+--+--+\n");
+                          }
+                          using (FileStream fstream = new FileStream("report.txt", FileMode.Create)) {
+                              // преобразуем строку в байты
+                              byte[] array = System.Text.Encoding.Default.GetBytes(table.ToString());
+                              // запись массива байтов в файл
+                              fstream.Write(array, 0, array.Length);
+                              MessageBox.Show("Отчёт успешно сгенерирован!");
+                          }
+                      }));
+            }
+        }
+
         private RelayCommand editProductCommand;
         public RelayCommand EditProductCommand {
             get {
                 return editProductCommand ??
                   (editProductCommand = new RelayCommand(
                       obj => {
-                          ServerOperations.SendData($"EditProduct\n{SelectedProduct.Id}\n{SelectedProduct.Name}\n{SelectedProduct.Price}\n{SelectedProduct.Description}\n");
-                          if (ServerOperations.ReceiveData() == "success") {
-                              MessageBox.Show("Товар изменён");
-                              this.OnClosingRequest();
+                          ValidationRules validation = new ValidationRules();
+                          validation.EditProductValidate(SelectedProduct.Name, SelectedProduct.Price, SelectedProduct.Description, SelectedProduct.Manufacturer);
+                          if (!String.IsNullOrEmpty(validation.ValidationErors)) {
+                              MessageBox.Show(validation.ValidationErors);
+                              return;
                           }
-                          else
-                              MessageBox.Show("Ошибка изменения");
+                          SelectedProduct.ImagePath = ImagePathForEdit;
+                          ServerOperations.SendData($"EditProduct\n{SelectedProduct.Id}\n{SelectedProduct.Name}\n{SelectedProduct.Price}\n{SelectedProduct.Description}\n{SelectedProduct.Manufacturer}\n{SelectedProduct.ImagePath}\n");
+                              if (ServerOperations.ReceiveData() == "success")
+                                  MessageBox.Show("Товар изменён");
+                              else
+                                  MessageBox.Show("Ошибка изменения!");
                       }));
             }
         }
@@ -339,12 +406,35 @@ namespace SportsStore.ViewModels {
                           OpenFileDialog openFileDialog = new OpenFileDialog();
                           openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
                           if (openFileDialog.ShowDialog() == true) {
-                              SelectedProduct.ImagePath = Path.GetFileName(openFileDialog.FileName);
+                              SelectedProduct.ImagePath = openFileDialog.FileName;
                               ImagePath = openFileDialog.FileName;
                               byte[] imageArray = File.ReadAllBytes(openFileDialog.FileName);
                               if (imageArray.Length > 100000) {
                                   MessageBox.Show("Изображение слишком большое");
                                   ImagePath = "Assets/no_foto.jpg";
+                                  return;
+                              }
+                          }
+                          else return;
+                      }));
+            }
+        }
+
+        private RelayCommand editPhotoCommand;
+        public RelayCommand EditPhotoCommand {
+            get {
+                return editPhotoCommand ??
+                  (editPhotoCommand = new RelayCommand(
+                      obj => {
+                          OpenFileDialog openFileDialog = new OpenFileDialog();
+                          openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+                          openFileDialog.InitialDirectory = GetFullPathInDocuments();
+                          if (openFileDialog.ShowDialog() == true) {
+                              ImagePathForEdit = openFileDialog.FileName;
+                              byte[] imageArray = File.ReadAllBytes(openFileDialog.FileName);
+                              if (imageArray.Length > 100000) {
+                                  MessageBox.Show("Изображение слишком большое");
+                                  ImagePathForEdit = "Assets/no_foto.jpg";
                                   return;
                               }
                           }
@@ -373,7 +463,6 @@ namespace SportsStore.ViewModels {
 
 
         public void DeleteProduct(Product product) {
-            File.Delete(GetFullPathInDocuments($"{product.Name}.jpg"));
             Products.Remove(product);
             ServerOperations.SendData($"DeleteProduct\n{product.Id}\n");
             if (ServerOperations.ReceiveData() == "success") {

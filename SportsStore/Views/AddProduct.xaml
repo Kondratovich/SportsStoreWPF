@@ -21,12 +21,15 @@
                     <TextBox x:Name="priceBox" Foreground="Black" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     <Label Content="Описание товара"></Label>
                     <TextBox x:Name="descriptionBox" Foreground="Black" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <Label Content="Производитель"></Label>
+                    <TextBox x:Name="manufacturerBox" Foreground="Black" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     <Button x:Name="SaveBtn" Content="Сохранить" Foreground="Black" Background="Azure"  Command="{Binding AddProductCommand}" Margin="0 20 0 0">
                         <Button.CommandParameter>
                             <MultiBinding Converter="{StaticResource TotalConverter }">
                                 <Binding Path="Text"  ElementName="nameBox"/>
                                 <Binding Path="Text"  ElementName="priceBox"/>
                                 <Binding Path="Text"  ElementName="descriptionBox"/>
+                                <Binding Path="Text"  ElementName="manufacturerBox"/>
                             </MultiBinding>
                         </Button.CommandParameter>
                     </Button>

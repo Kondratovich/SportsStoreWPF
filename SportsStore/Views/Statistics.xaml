@@ -13,45 +13,42 @@
                 <DataGrid Name="PreferencesDataGrid" ItemsSource="{Binding Preferences}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Email эксперта" Width="*" Binding="{Binding UserEmail}"/>
-                        <DataGridTextColumn Header="Материалы" Width="*" Binding="{Binding Materials}"/>
-                        <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding Price}"/>
-                        <DataGridTextColumn Header="Вид спорта" Width="*" Binding="{Binding KindsOfSports}"/>
-                        <DataGridTextColumn Header="Гарантия" Width="*" Binding="{Binding Guarantee}"/>
-                        <DataGridTextColumn Header="Экологичность" Width="*" Binding="{Binding EcoFriendly}"/>
+                        <DataGridTextColumn Header="Купить профессиональный инвентарь" Width="*" Binding="{Binding IsProfessional}"/>
+                        <DataGridTextColumn Header="Сэкономить на покупке" Width="*" Binding="{Binding Price}"/>
+                        <DataGridTextColumn Header="Заняться новым видом спорта" Width="*" Binding="{Binding KindsOfSports}"/>
+                        <DataGridTextColumn Header="Поддержать любимого производителя" Width="*" Binding="{Binding Manufacturer}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Преобразование матрицы оценок" Foreground="#5c5353" Margin="10" FontSize="15" FontWeight="Medium"/>
                 <DataGrid ItemsSource="{Binding Preferences}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Email эксперта" Width="*" Binding="{Binding UserEmail}"/>
-                        <DataGridTextColumn Header="Материалы" Width="*" Binding="{Binding MaterialsReverse}"/>
-                        <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding PriceReverse}"/>
-                        <DataGridTextColumn Header="Вид спорта" Width="*" Binding="{Binding KindsOfSportsReverse}"/>
-                        <DataGridTextColumn Header="Гарантия" Width="*" Binding="{Binding GuaranteeReverse}"/>
-                        <DataGridTextColumn Header="Экологичность" Width="*" Binding="{Binding EcoFriendlyReverse}"/>
+                        <DataGridTextColumn Header="Купить профессиональный инвентарь" Width="*" Binding="{Binding IsProfessionalReverse}"/>
+                        <DataGridTextColumn Header="Сэкономить на покупке" Width="*" Binding="{Binding PriceReverse}"/>
+                        <DataGridTextColumn Header="Заняться новым видом спорта" Width="*" Binding="{Binding KindsOfSportsReverse}"/>
+                        <DataGridTextColumn Header="Поддержать любимого производителя" Width="*" Binding="{Binding ManufacturerReverse}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Суммы преобразованных оценок по каждой из альтернатив" Foreground="#5c5353" Margin="10" FontSize="15" FontWeight="Medium"/>
                 <DataGrid ItemsSource="{Binding PreferenceSums}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cумма альтернатив" Width="*" Binding="{Binding Sum}"/>
-                        <DataGridTextColumn Header="Материалы" Width="*" Binding="{Binding MaterialsSum}"/>
-                        <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding PriceSum}"/>
-                        <DataGridTextColumn Header="Вид спорта" Width="*" Binding="{Binding KindsOfSportsSum}"/>
-                        <DataGridTextColumn Header="Гарантия" Width="*" Binding="{Binding GuaranteeSum}"/>
-                        <DataGridTextColumn Header="Экологичность" Width="*" Binding="{Binding EcoFriendlySum}"/>
+                        <DataGridTextColumn Header="Купить профессиональный инвентарь" Width="*" Binding="{Binding IsProfessionalSum}"/>
+                        <DataGridTextColumn Header="Сэкономить на покупке" Width="*" Binding="{Binding PriceSum}"/>
+                        <DataGridTextColumn Header="Заняться новым видом спорта" Width="*" Binding="{Binding KindsOfSportsSum}"/>
+                        <DataGridTextColumn Header="Поддержать любимого производителя" Width="*" Binding="{Binding ManufacturerSum}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Веса альтернатив" Margin="10" Foreground="#5c5353" FontSize="15" FontWeight="Medium"/>
                 <DataGrid ItemsSource="{Binding PreferenceSums}" AlternatingRowBackground="#ededed" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" Margin="0 0 0 10" VerticalAlignment="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Материалы" Width="*" Binding="{Binding MaterialsWeight}"/>
-                        <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding PriceWeight}"/>
-                        <DataGridTextColumn Header="Вид спорта" Width="*" Binding="{Binding KindsOfSportsWeight}"/>
-                        <DataGridTextColumn Header="Гарантия" Width="*" Binding="{Binding GuaranteeWeight}"/>
-                        <DataGridTextColumn Header="Экологичность" Width="*" Binding="{Binding EcoFriendlyWeight}"/>
+                        <DataGridTextColumn Header="Купить профессиональный инвентарь" Width="*" Binding="{Binding IsProfessionalWeight}"/>
+                        <DataGridTextColumn Header="Сэкономить на покупке" Width="*" Binding="{Binding PriceWeight}"/>
+                        <DataGridTextColumn Header="Заняться новым видом спорта" Width="*" Binding="{Binding KindsOfSportsWeight}"/>
+                        <DataGridTextColumn Header="Поддержать любимого производителя" Width="*" Binding="{Binding ManufacturerWeight}"/>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button x:Name="CreateReportBtn" Content="Сгенерировать отчёт" Height="28" Width="235" Margin="10" Command="{Binding GenerateReportCommand}" HorizontalAlignment="Center"></Button>
             </StackPanel>
         </ScrollViewer>
     </Grid>

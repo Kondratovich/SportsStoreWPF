@@ -9,26 +9,23 @@
     <Grid>
         <Border Margin="15" Background="White" Width="900" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="30"  CornerRadius="20">
             <StackPanel Orientation="Horizontal">
-                <StackPanel Width="150">
-                    <Label Content="Материалы" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Height="50" Margin="0 0 0 10"></Label>
-                    <Label Content="Цена" FontSize="20" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
-                    <Label Content="Вид Спорта" FontSize="20" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
-                    <Label Content="Гарантия" FontSize="20" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
-                    <Label Content="Экологичность" FontSize="20" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
-
+                <StackPanel Width="325">
+                    <Label Content="Купить профессиональный инвентарь" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Height="50" Margin="0 0 0 10"></Label>
+                    <Label Content="Сэкономить на покупке" FontSize="18" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
+                    <Label Content="Заняться новым видом спорта" FontSize="18" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
+                    <Label Content="Поддержать любимого производителя" FontSize="18" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0 0 0 10"></Label>
                 </StackPanel>
                 <StackPanel Width="100">
-                    <TextBox x:Name="materialsBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="14" Text="{Binding Preference.Materials}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBox x:Name="professionalBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="14" Text="{Binding Preference.IsProfessional}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     <TextBox x:Name="priceBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.Price}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     <TextBox x:Name="sportsBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.KindsOfSports}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                    <TextBox x:Name="guaranteeBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.Guarantee}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                    <TextBox x:Name="ecoBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.EcoFriendly}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBox x:Name="brandBox" Width="50" Height="50" HorizontalAlignment="Center" Foreground="Black" FontSize="15" Text="{Binding Preference.Manufacturer}" Margin="0 0 0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     <Button x:Name="SaveBtn" Content="Сохранить" HorizontalAlignment="Center" Foreground="Black" Background="Azure"  Command="{Binding AddPreferenceForm}" Margin="0 20 0 0"/>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock FontSize="20" Width="500" Foreground="Gray" Margin="20" TextWrapping="Wrap">
+                    <TextBlock FontSize="18" Width="400" Foreground="Gray" Margin="10" TextWrapping="Wrap">
                         <TextBlock.Text>
-                            Обозначьте цифрами от 1 до 5 в порядке возрастания критерии
+                            Обозначьте цифрами от 1 до 4 в порядке возрастания цели,
                             которыми вы руковдствуетесь при выборе продукции спорт магазина.
                         </TextBlock.Text>
                     </TextBlock>

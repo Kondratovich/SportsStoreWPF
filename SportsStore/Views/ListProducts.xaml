@@ -19,7 +19,14 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Image" Width="*" Binding="{Binding ImagePath}"/>
+                <DataGridTextColumn Header="Manufacturer" Width="*" Binding="{Binding Manufacturer}"/>
+                <DataGridTextColumn Header="Image" Width="*" Binding="{Binding ImagePath}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

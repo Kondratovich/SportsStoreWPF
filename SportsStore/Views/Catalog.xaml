@@ -18,7 +18,7 @@
                                             <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="19"/>
                                         </StackPanel.Effect>
                                         <TextBlock Text="{Binding Name}" Margin="10" FontFamily="Showcard Gothic" FontSize="12" Foreground="#FFC00000"/>
-                                        <Image Source="{Binding FullImagePath}" Width="200" Height="150" Stretch="UniformToFill" />
+                                        <Image Source="{Binding ImagePath}" Width="200" Height="150" Stretch="UniformToFill" />
                                         <TextBlock Text="{Binding Description}" Height="30" FontSize="11" Margin="5 5 5 10" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines" Foreground="Black"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                                             <TextBlock Text="{Binding Price, StringFormat={}{0:C}}" Foreground="Black" VerticalAlignment="Center" Margin="5" FontSize="20" FontFamily="Champagne &amp; Limousines"/>
